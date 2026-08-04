@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EntraHuntKit — Hunting Console (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e16; --panel:#0f1420; --panel2:#0c111b; --border:#1c2430;
+    --muted:#5b6675; --text:#e6edf3; --sub:#8a94a6;
+    --lime:#9fef00; --red:#ff5f56; --amber:#ffbd2e; --green:#27c93f;
+    --mono:'JetBrains Mono',ui-monospace,'Cascadia Code',Consolas,monospace;
+    --sans:'Outfit',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:var(--bg); color:var(--text); font-family:var(--sans);
+    font-size:14px; line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--lime);text-decoration:none}
+
+  /* ---- top bar ---- */
+  .topbar{
+    display:flex;align-items:center;gap:16px;padding:14px 22px;
+    border-bottom:1px solid var(--border);
+    background:
+      radial-gradient(700px 120px at 12% -40%, rgba(159,239,0,.10), transparent 70%),
+      var(--panel2);
+    position:sticky;top:0;z-index:5;
+  }
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--mono)}
+  .logo{
+    width:30px;height:30px;border-radius:7px;display:grid;place-items:center;
+    background:var(--lime);color:#0a0e16;font-weight:700;font-size:16px;
+    box-shadow:0 0 22px rgba(159,239,0,.35);
+  }
+  .brand b{font-size:16px;letter-spacing:.3px}
+  .brand b span{color:var(--lime)}
+  .brand small{display:block;color:var(--muted);font-size:11px;font-family:var(--sans);letter-spacing:.4px}
+  .grow{flex:1}
+  .pill{
+    font-family:var(--mono);font-size:11px;padding:5px 11px;border-radius:999px;
+    border:1px solid var(--border);color:var(--sub);white-space:nowrap;
+  }
+  .pill.demo{color:var(--amber);border-color:rgba(255,189,46,.4);background:rgba(255,189,46,.07)}
+  .pill.attack{color:var(--lime);border-color:rgba(159,239,0,.35);background:rgba(159,239,0,.06)}
+
+  /* ---- layout ---- */
+  .shell{display:grid;grid-template-columns:290px 1fr;min-height:calc(100vh - 61px)}
+  .side{border-right:1px solid var(--border);background:var(--panel2);padding:16px 0}
+  .search{margin:0 16px 14px}
+  .search input{
+    width:100%;background:var(--panel);border:1px solid var(--border);color:var(--sub);
+    font-family:var(--mono);font-size:12px;padding:9px 12px;border-radius:8px;
+  }
+  .navitem{
+    display:flex;align-items:center;gap:9px;padding:9px 16px 9px 18px;cursor:pointer;
+    color:var(--sub);font-family:var(--mono);font-size:12.5px;border-left:2px solid transparent;
+  }
+  .navitem:hover{background:rgba(255,255,255,.02);color:var(--text)}
+  .navitem.active{background:rgba(159,239,0,.06);border-left-color:var(--lime);color:var(--text)}
+  .navitem .tid{margin-left:auto;font-size:10.5px;color:var(--muted)}
+  .navitem.active .tid{color:var(--lime)}
+  .group{padding:16px 16px 6px;font-family:var(--mono);font-size:10.5px;letter-spacing:1.4px;
+    text-transform:uppercase;color:var(--muted)}
+  .cnt{float:right;color:var(--muted)}
+
+  .main{padding:26px 30px 40px;min-width:0}
+
+  /* ---- coverage view ---- */
+  .h1{font-size:22px;font-weight:600;margin:0 0 4px}
+  .lead{color:var(--sub);margin:0 0 22px;max-width:760px}
+  .lead b{color:var(--text)}
+  .stripe{display:flex;gap:26px;margin:0 0 26px;flex-wrap:wrap}
+  .stat b{font-family:var(--mono);font-size:26px;color:var(--lime);display:block;line-height:1}
+  .stat small{color:var(--muted);font-size:11.5px;letter-spacing:.5px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+  .card{
+    background:linear-gradient(180deg,var(--panel),var(--panel2));
+    border:1px solid var(--border);border-radius:12px;padding:16px 17px;
+    transition:border-color .18s,transform .18s;cursor:pointer;
+  }
+  .card:hover{border-color:rgba(159,239,0,.4);transform:translateY(-2px)}
+  .card .row1{display:flex;align-items:baseline;justify-content:space-between}
+  .card h3{margin:0;font-size:15px;font-weight:600}
+  .card .num{font-family:var(--mono);font-size:24px;color:var(--lime);font-weight:700}
+  .card .num small{font-size:11px;color:var(--muted);font-weight:400}
+  .bar{height:5px;border-radius:4px;background:#131a27;margin:12px 0 12px;overflow:hidden}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,#6fbf00,var(--lime));border-radius:4px}
+  .tchips{display:flex;flex-wrap:wrap;gap:6px}
+  .tchip{font-family:var(--mono);font-size:10.5px;color:var(--sub);border:1px solid var(--border);
+    padding:3px 7px;border-radius:6px;background:var(--panel2)}
+
+  /* ---- console view ---- */
+  .qhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+  .qhead h2{margin:0;font-size:20px;font-weight:600}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
+  .chip{font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:7px;
+    border:1px solid var(--border);color:var(--sub);background:var(--panel2)}
+  .chip.tid{color:var(--lime);border-color:rgba(159,239,0,.3)}
+  .catch{color:var(--sub);margin:12px 0 18px;max-width:820px}
+  .catch b{color:var(--text)}
+
+  .toolbar{display:flex;align-items:center;gap:10px;margin-bottom:0}
+  .select{font-family:var(--mono);font-size:12px;color:var(--sub);background:var(--panel);
+    border:1px solid var(--border);border-radius:8px;padding:8px 12px}
+  .run{margin-left:auto;font-family:var(--mono);font-size:12.5px;font-weight:600;color:#0a0e16;
+    background:var(--lime);border:none;border-radius:8px;padding:9px 18px;cursor:pointer;
+    box-shadow:0 0 18px rgba(159,239,0,.3)}
+  .run:hover{filter:brightness(1.08)}
+
+  .editor{
+    background:var(--panel);border:1px solid var(--border);border-top-left-radius:10px;
+    border-top-right-radius:10px;margin-top:12px;overflow:hidden;
+  }
+  .editor .bar-top{display:flex;gap:7px;padding:11px 14px;border-bottom:1px solid var(--border);align-items:center}
+  .dot{width:11px;height:11px;border-radius:50%}
+  .editor .lbl{margin-left:8px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+  pre{margin:0;padding:16px 18px;font-family:var(--mono);font-size:12.8px;line-height:1.7;
+    overflow-x:auto;white-space:pre}
+  .kw{color:var(--lime)} .st{color:#e3b341} .cm{color:var(--muted);font-style:italic} .nm{color:#79c0ff}
+
+  .results{border:1px solid var(--border);border-top:none;border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;background:var(--panel2)}
+  .rhead{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--border);
+    font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .rhead .sev{margin-left:auto;font-weight:600}
+  .sev.high{color:var(--red)} .sev.none{color:var(--green)}
+  .tbl{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
+  .tbl th{text-align:left;padding:10px 16px;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border);
+    font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+  .tbl td{padding:11px 16px;border-bottom:1px solid #131a27;color:var(--text);vertical-align:top}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl tr.hit td{background:rgba(255,95,86,.06);border-left:2px solid var(--red)}
+  .tbl tr.hit td:first-child{border-left:2px solid var(--red)}
+  .warn{color:var(--red);font-weight:600}
+  .tag{display:inline-block;font-size:9.5px;padding:1px 6px;border-radius:5px;margin-left:7px;
+    background:rgba(255,95,86,.15);color:var(--red);border:1px solid rgba(255,95,86,.35);vertical-align:middle}
+  .tag.ok{background:rgba(39,201,63,.12);color:var(--green);border-color:rgba(39,201,63,.3)}
+  .rownote{color:var(--muted);font-size:10.5px;margin-top:3px}
+
+  .tuning{display:flex;gap:11px;margin-top:18px;padding:14px 16px;border-radius:10px;
+    background:rgba(255,189,46,.05);border:1px solid rgba(255,189,46,.22)}
+  .tuning .ic{color:var(--amber);font-size:15px;line-height:1.4}
+  .tuning b{color:var(--amber);font-family:var(--mono);font-size:11px;letter-spacing:.6px;text-transform:uppercase}
+  .tuning p{margin:3px 0 0;color:var(--sub)}
+
+  .foot{padding:14px 30px;border-top:1px solid var(--border);color:var(--muted);
+    font-family:var(--mono);font-size:11px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">E</div>
+      <div>
+        <b>Entra<span>HuntKit</span></b>
+        <small>Hunting Console</small>
+      </div>
+    </div>
+    <span class="pill attack">ATT&amp;CK-mapped</span>
+    <span class="pill">Defender XDR + Sentinel · KQL</span>
+    <span class="grow"></span>
+    <span class="pill demo">◆ DEMO · synthetic sample data</span>
+  </div>
+
+  <div class="shell">
+    <aside class="side">
+      <div class="search"><input value="  Search 16 detections…" readonly></div>
+      <div id="nav"></div>
+    </aside>
+    <main class="main" id="main"></main>
+  </div>
+
+  <div class="foot">
+    <span>EntraHuntKit v0.1.0</span><span>·</span>
+    <span>16 queries · 7 ATT&amp;CK tactics · 3 IOC lists</span><span>·</span>
+    <span style="color:var(--amber)">All data on this page is synthetic — for illustration only</span>
+  </div>
+
+<script>
+const TACTICS=[
+  {name:'Initial Access',count:3,tech:['T1078','T1078.004'],},
+  {name:'Persistence',count:5,tech:['T1528','T1098.001','T1098.003','T1137.005','T1484.002']},
+  {name:'Defense Evasion',count:3,tech:['T1562.001','T1562.007','T1562.008']},
+  {name:'Credential Access',count:2,tech:['T1110.003','T1621']},
+  {name:'Discovery',count:1,tech:['T1087.004']},
+  {name:'Collection',count:1,tech:['T1114.003']},
+  {name:'Exfiltration',count:1,tech:['T1567','T1530']},
+];
+
+const QUERIES=[
+{
+  id:'oauth', tactic:'Persistence', short:'Illicit OAuth consent', tid:'T1528',
+  title:'Illicit OAuth application consent',
+  platform:'Sentinel', license:'M365 audit', table:'AuditLogs', ms:812,
+  catches:'A user granting OAuth permissions to a malicious app — the core of <b>consent-phishing</b> that hands an app persistent Graph access to mailboxes and files.',
+  kql:`AuditLogs
+| where TimeGenerated > ago(7d)
+| where OperationName has "Consent to application"
+| extend Actor = tostring(InitiatedBy.user.userPrincipalName)
+| extend TargetApp = tostring(TargetResources[0].displayName)
+| project TimeGenerated, Actor, TargetApp, GrantedScopes, Result
+| order by TimeGenerated desc`,
+  columns:['TimeGenerated','Actor','TargetApp','GrantedScopes','Result'],
+  rows:[
+    {cells:['2026-08-04 09:14:22','j.doe@contoso.com','Mail Backup Pro','Mail.ReadWrite, Mail.Send, offline_access','Success'],hit:true,warnCol:2,note:'Unverified publisher · Tier-1 mailbox scopes + offline_access'},
+    {cells:['2026-08-03 14:02:10','a.smith@contoso.com','Adobe Acrobat','User.Read','Success']},
+    {cells:['2026-08-02 11:31:55','it-admin@contoso.com','Salesforce','openid, profile, email','Success']},
+  ],
+  tuning:'Triage by <b>who</b> consented (user self-consent to an unknown app is the red flag) and <b>which scopes</b>. Cross-reference the app ID against <code>ioc/malicious-oauth-app-ids.md</code>.'
+},
+{
+  id:'bec', tactic:'Persistence', short:'BEC forwarding rule', tid:'T1137.005',
+  title:'New mailbox forwarding / redirect rule (BEC)',
+  platform:'Sentinel', license:'M365 audit', table:'OfficeActivity', ms:640,
+  catches:'An inbox rule that auto-forwards mail to an <b>external</b> address — the classic Business Email Compromise persistence + exfiltration move, often named "." to hide in Outlook.',
+  kql:`OfficeActivity
+| where TimeGenerated > ago(7d)
+| where Operation in ("New-InboxRule", "Set-InboxRule")
+| extend RuleParams = parse_json(Parameters)
+| mv-apply p = RuleParams on (
+    where p.Name in ("ForwardTo", "RedirectTo", "ForwardAsAttachmentTo")
+    | project ParamName = tostring(p.Name), ParamValue = tostring(p.Value)
+)
+| project TimeGenerated, UserId, ClientIP, RuleName, ParamName, ParamValue`,
+  columns:['TimeGenerated','UserId','ClientIP','RuleName','ParamValue'],
+  rows:[
+    {cells:['2026-08-04 03:22:41','c.walsh@contoso.com','45.146.166.12','"."','payroll.receipts@gmail.com'],hit:true,warnCol:4,note:'Forwards to external domain · rule created from foreign IP at 03:22'},
+    {cells:['2026-08-01 09:10:03','m.oconnor@contoso.com','52.169.44.9','"Team digests"','digest@contoso.com']},
+  ],
+  tuning:'The high-fidelity signal is forwarding to an <b>external</b> domain, created shortly after a risky sign-in. Check <code>ParamValue</code> for domains outside your tenant; pair with the hide/delete rule hunt.'
+},
+{
+  id:'spray', tactic:'Credential Access', short:'Password spray', tid:'T1110.003',
+  title:'Password spray',
+  platform:'Sentinel', license:'Entra ID P1', table:'SigninLogs', ms:1109,
+  catches:'One source hitting <b>many</b> accounts with a <b>few</b> passwords — low-and-slow credential guessing that stays under per-account lockout thresholds.',
+  kql:`SigninLogs
+| where TimeGenerated > ago(1d)
+| where ResultType in (50126, 50053, 50055, 50056)
+| summarize FailedUsers = dcount(UserPrincipalName), Attempts = count(),
+    Users = make_set(UserPrincipalName, 100)
+    by IPAddress, bin(TimeGenerated, 1h)
+| where FailedUsers >= 10
+| order by FailedUsers desc`,
+  columns:['IPAddress','FailedUsers','Attempts','Users (sample)','Window'],
+  rows:[
+    {cells:['185.220.101.44','47','51','j.doe; a.smith; c.walsh; k.byrne; +43','2026-08-04 02:00'],hit:true,warnCol:1,note:'Tor exit node · 47 distinct users, 1 password, one hour'},
+    {cells:['10.0.4.12','1','6','svc-scanner','2026-08-04 07:00'],ok:true,note:'Single service account — expired password, not a spray'},
+  ],
+  tuning:'The signature is <b>high distinct-user count from a single IP</b>. Enrich <code>IPAddress</code> with geo/ASN — sprays come from hosting/VPS ranges. A spray IP that later produces a success is a confirmed breach.'
+},
+{
+  id:'mfa', tactic:'Credential Access', short:'MFA fatigue', tid:'T1621',
+  title:'MFA-fatigue / push-bombing',
+  platform:'Sentinel', license:'Entra ID P1', table:'SigninLogs', ms:733,
+  catches:'A burst of MFA prompts against one user — the attacker has the password and is spamming push notifications hoping for an accidental <b>Approve</b>.',
+  kql:`SigninLogs
+| where TimeGenerated > ago(1d)
+| where ResultType in (50074, 500121)   // MFA required / MFA denied
+| summarize MfaPrompts = count(), IPs = make_set(IPAddress, 20)
+    by UserPrincipalName, bin(TimeGenerated, 1h)
+| where MfaPrompts >= 5
+| order by MfaPrompts desc`,
+  columns:['Window','UserPrincipalName','MfaPrompts','SourceIP','Follow-on sign-in'],
+  rows:[
+    {cells:['2026-08-04 02:00–03:00','k.byrne@contoso.com','23','45.146.166.12','✔ Success at 02:47'],hit:true,warnCol:2,note:'23 prompts then a success from the same foreign IP → likely approved under fatigue'},
+    {cells:['2026-08-04 08:00–09:00','p.nolan@contoso.com','6','2001:db8:mobile','— no success'],note:'Flaky mobile network, no follow-on success'},
+  ],
+  tuning:'A <code>500121</code> storm followed by a <code>ResultType == 0</code> from a <b>new IP</b> is the compromise pattern — high severity. Move users to number-matching MFA to kill this technique.'
+},
+];
+
+// ---- lightweight KQL highlighter ----
+function hl(code){
+  const KW=/\b(where|summarize|project|project-away|extend|order|by|distinct|count|dcount|make_set|make_bag|bag_pack|bin|ago|has_any|has|in|and|or|let|on|parse_json|tostring|array_length|iff|dynamic)\b/g;
+  return code.split('\n').map(line=>{
+    let s=line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    let cm='';
+    const ci=s.indexOf('//');
+    if(ci>=0){cm='<span class="cm">'+s.slice(ci)+'</span>';s=s.slice(0,ci);}
+    s=s.replace(/"[^"]*"/g,m=>' '+m+'');           // shield strings
+    s=s.replace(KW,'<span class="kw">$1</span>');
+    s=s.replace(/\b(\d+[dhm]?)\b/g,'<span class="nm">$1</span>');
+    s=s.replace(/ ([^]*)/g,(m,p)=>'<span class="st">'+p+'</span>');
+    return s+cm;
+  }).join('\n');
+}
+
+function coverageView(){
+  const total=QUERIES.length, maxc=Math.max(...TACTICS.map(t=>t.count));
+  const cards=TACTICS.map(t=>`
+    <div class="card">
+      <div class="row1"><h3>${t.name}</h3><div class="num">${t.count}<small>/16</small></div></div>
+      <div class="bar"><i style="width:${Math.round(t.count/maxc*100)}%"></i></div>
+      <div class="tchips">${t.tech.map(x=>`<span class="tchip">${x}</span>`).join('')}</div>
+    </div>`).join('');
+  return `
+    <h1 class="h1">ATT&amp;CK coverage</h1>
+    <p class="lead"><b>SecLists, but for M365 defenders.</b> Curated, paste-ready hunting queries for Entra ID, Intune &amp; Microsoft 365 — mapped to MITRE ATT&amp;CK, grouped by tactic, ready for Defender XDR Advanced Hunting or Microsoft Sentinel.</p>
+    <div class="stripe">
+      <div class="stat"><b>16</b><small>HUNTING QUERIES</small></div>
+      <div class="stat"><b>7</b><small>ATT&amp;CK TACTICS</small></div>
+      <div class="stat"><b>3</b><small>IOC LISTS</small></div>
+      <div class="stat"><b>0</b><small>INSTALL REQUIRED</small></div>
+    </div>
+    <div class="grid">${cards}</div>`;
+}
+
+function consoleView(q){
+  const hits=q.rows.filter(r=>r.hit).length;
+  const sev = hits ? `<span class="sev high">● ${hits} high-severity match${hits>1?'es':''}</span>`
+                   : `<span class="sev none">● no matches</span>`;
+  const head=q.columns.map(c=>`<th>${c}</th>`).join('');
+  const body=q.rows.map(r=>{
+    const tds=r.cells.map((c,i)=>{
+      let v=c;
+      if(r.hit && i===r.warnCol) v=`<span class="warn">${c}</span><span class="tag">⚠ suspicious</span>`;
+      let note=(i===0 && r.note)?`<div class="rownote">${r.ok?'ℹ ':'↳ '}${r.note}</div>`:'';
+      if(r.ok && i===0) v=`${c}<span class="tag ok">✓ benign</span>`;
+      return `<td>${v}${note}</td>`;
+    }).join('');
+    return `<tr class="${r.hit?'hit':''}">${tds}</tr>`;
+  }).join('');
+  return `
+    <div class="qhead"><h2>${q.title}</h2></div>
+    <div class="chips">
+      <span class="chip tid">${q.tid}</span>
+      <span class="chip">${q.tactic}</span>
+      <span class="chip">${q.platform}</span>
+      <span class="chip">table: ${q.table}</span>
+      <span class="chip">license: ${q.license}</span>
+    </div>
+    <p class="catch"><b>What it catches:</b> ${q.catches}</p>
+    <div class="toolbar">
+      <span class="select">⏱ Last 7 days ▾</span>
+      <span class="select">${q.table} ▾</span>
+      <button class="run">▸ Run query</button>
+    </div>
+    <div class="editor">
+      <div class="bar-top">
+        <span class="dot" style="background:var(--red)"></span>
+        <span class="dot" style="background:var(--amber)"></span>
+        <span class="dot" style="background:var(--green)"></span>
+        <span class="lbl">${q.tactic.toLowerCase().replace(' ','-')}/${q.id}.kql — Advanced Hunting</span>
+      </div>
+      <pre>${hl(q.kql)}</pre>
+    </div>
+    <div class="results">
+      <div class="rhead"><span>Results (${q.rows.length})</span><span>·</span><span>${q.ms} ms</span><span>·</span><span>synthetic sample data</span>${sev}</div>
+      <table class="tbl"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>
+    </div>
+    <div class="tuning">
+      <div class="ic">⚙</div>
+      <div><b>Tuning / false positives</b><p>${q.tuning}</p></div>
+    </div>`;
+}
+
+function buildNav(active){
+  let html=`<div class="navitem ${active==='coverage'?'active':''}" data-id="coverage">▚ Coverage overview</div>`;
+  const byTactic={};
+  QUERIES.forEach(q=>{(byTactic[q.tactic]=byTactic[q.tactic]||[]).push(q)});
+  Object.keys(byTactic).forEach(t=>{
+    html+=`<div class="group">${t}<span class="cnt">${byTactic[t].length}</span></div>`;
+    byTactic[t].forEach(q=>{
+      html+=`<div class="navitem ${active===q.id?'active':''}" data-id="${q.id}">
+        <span>${q.short}</span><span class="tid">${q.tid}</span></div>`;
+    });
+  });
+  document.getElementById('nav').innerHTML=html;
+  document.querySelectorAll('.navitem').forEach(n=>n.onclick=()=>render(n.dataset.id));
+}
+
+function render(id){
+  const main=document.getElementById('main');
+  if(id==='coverage'){ main.innerHTML=coverageView();
+    document.querySelectorAll('.card').forEach((c,i)=>c.onclick=()=>{
+      const q=QUERIES.find(x=>x.tactic===TACTICS[i].name); if(q) render(q.id);
+    });
+  } else { main.innerHTML=consoleView(QUERIES.find(q=>q.id===id)); }
+  buildNav(id);
+  window.scrollTo(0,0);
+}
+
+render('coverage');
+</script>
+</body>
+</html>
