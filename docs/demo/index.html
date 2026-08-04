@@ -149,6 +149,11 @@
   .tuning b{color:var(--amber);font-family:var(--mono);font-size:11px;letter-spacing:.6px;text-transform:uppercase}
   .tuning p{margin:3px 0 0;color:var(--sub)}
 
+  .video-wrap{border:1px solid var(--border);border-radius:12px;overflow:hidden;
+    background:#05070c;box-shadow:0 0 40px rgba(159,239,0,.06);max-width:960px}
+  .video-wrap video{display:block;width:100%;height:auto}
+  .vcap{color:var(--muted);font-family:var(--mono);font-size:11.5px;margin-top:12px}
+
   .foot{padding:14px 30px;border-top:1px solid var(--border);color:var(--muted);
     font-family:var(--mono);font-size:11px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 </style>
@@ -361,8 +366,19 @@ function consoleView(q){
     </div>`;
 }
 
+function videoView(){
+  return `
+    <h1 class="h1">Walkthrough</h1>
+    <p class="lead">A short recorded walkthrough of EntraHuntKit in action — hunting Entra ID, Intune &amp; M365 threats with paste-ready KQL.</p>
+    <div class="video-wrap">
+      <video src="demo.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
+    </div>
+    <p class="vcap">▶ EntraHuntKit — recorded walkthrough. Autoplays muted; use the controls for sound.</p>`;
+}
+
 function buildNav(active){
   let html=`<div class="navitem ${active==='coverage'?'active':''}" data-id="coverage">▚ Coverage overview</div>`;
+  html+=`<div class="navitem ${active==='video'?'active':''}" data-id="video">▶ Walkthrough video</div>`;
   const byTactic={};
   QUERIES.forEach(q=>{(byTactic[q.tactic]=byTactic[q.tactic]||[]).push(q)});
   Object.keys(byTactic).forEach(t=>{
@@ -382,6 +398,7 @@ function render(id){
     document.querySelectorAll('.card').forEach((c,i)=>c.onclick=()=>{
       const q=QUERIES.find(x=>x.tactic===TACTICS[i].name); if(q) render(q.id);
     });
+  } else if(id==='video'){ main.innerHTML=videoView();
   } else { main.innerHTML=consoleView(QUERIES.find(q=>q.id===id)); }
   buildNav(id);
   window.scrollTo(0,0);

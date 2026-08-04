@@ -73,13 +73,19 @@ If a query here saves you even one hour during an incident, **star the repo** �
 
 <img width="2507" height="795" alt="S1" src="https://github.com/user-attachments/assets/cafe41ce-1e35-43ad-a6dd-6ad64b95c937" />
 
+---
+
 ## DEMO
 
+Watch EntraHuntKit hunt Entra ID, Intune & M365 threats end-to-end:
 
+<p align="center">
+  <video src="https://github.com/juandresrodca/EntraHuntKit/raw/main/docs/demo/demo.mp4" controls muted width="820"></video>
+</p>
 
-
-
-
+<p align="center">
+  ▶ <b><a href="https://github.com/juandresrodca/EntraHuntKit/raw/main/docs/demo/demo.mp4">Watch the walkthrough</a></b> &nbsp;·&nbsp; or open the <a href="docs/demo/">interactive demo console</a>
+</p>
 
 ---
 
