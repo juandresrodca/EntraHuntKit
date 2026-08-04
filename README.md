@@ -77,15 +77,15 @@ If a query here saves you even one hour during an incident, **star the repo** �
 
 ## DEMO
 
-Watch EntraHuntKit hunt Entra ID, Intune & M365 threats end-to-end:
+**▶ [Open the live demo console →](https://juandresrodca.github.io/EntraHuntKit/demo/)** — explore all 16 detections in your browser. Zero install, no tenant needed.
+
+Or watch the walkthrough:
 
 <p align="center">
-  <video src="https://github.com/juandresrodca/EntraHuntKit/raw/main/docs/demo/demo.mp4" controls muted width="820"></video>
+  <video src="https://juandresrodca.github.io/EntraHuntKit/demo/demo.mp4" controls muted width="820"></video>
 </p>
 
-<p align="center">
-  ▶ <b><a href="https://github.com/juandresrodca/EntraHuntKit/raw/main/docs/demo/demo.mp4">Watch the walkthrough</a></b> &nbsp;·&nbsp; or open the <a href="docs/demo/">interactive demo console</a>
-</p>
+<p align="center"><sub>▶ Video not playing? <a href="https://juandresrodca.github.io/EntraHuntKit/demo/demo.mp4">Watch the walkthrough (MP4)</a> · or open the <a href="https://juandresrodca.github.io/EntraHuntKit/demo/">live demo</a></sub></p>
 
 ---
 
