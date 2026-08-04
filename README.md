@@ -72,10 +72,7 @@ If a query here saves you even one hour during an incident, **star the repo** â€
 ## Proof it works
 
 <!-- TODO: drop a real screenshot of a query catching something in Advanced Hunting / Sentinel here -->
-<p align="center">
-  <img src="docs/img/proof-placeholder.svg" alt="EntraHuntKit query catching an illicit OAuth consent in Defender Advanced Hunting" width="720">
-  <br><em>Placeholder â€” replace with a real screenshot of a hunt landing a hit.</em>
-</p>
+
 
 ---
 
