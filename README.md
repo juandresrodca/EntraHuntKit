@@ -79,13 +79,15 @@ If a query here saves you even one hour during an incident, **star the repo** �
 
 **▶ [Open the live demo console →](https://juandresrodca.github.io/EntraHuntKit/demo/)** — explore all 16 detections in your browser. Zero install, no tenant needed.
 
-Or watch the walkthrough:
+Or watch the 48-second walkthrough:
 
 <p align="center">
-  <video src="https://juandresrodca.github.io/EntraHuntKit/demo/demo.mp4" controls muted width="820"></video>
+  <a href="https://juandresrodca.github.io/EntraHuntKit/demo/demo.mp4">
+    <img src="docs/demo/poster.svg" alt="Watch the EntraHuntKit walkthrough (48s)" width="860">
+  </a>
 </p>
 
-<p align="center"><sub>▶ Video not playing? <a href="https://juandresrodca.github.io/EntraHuntKit/demo/demo.mp4">Watch the walkthrough (MP4)</a> · or open the <a href="https://juandresrodca.github.io/EntraHuntKit/demo/">live demo</a></sub></p>
+<p align="center"><sub>▶ Click the poster to play, or explore the <a href="https://juandresrodca.github.io/EntraHuntKit/demo/">live interactive demo</a> where it plays inline.</sub></p>
 
 ---
 
