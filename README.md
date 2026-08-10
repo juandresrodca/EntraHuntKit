@@ -74,11 +74,11 @@ If a query here saves you even one hour during an incident, **star the repo** â€
 
 ---
 
-## Proof it works
+
 
 <img width="2507" height="795" alt="S1" src="https://github.com/user-attachments/assets/cafe41ce-1e35-43ad-a6dd-6ad64b95c937" />
 
----
+
 
 ## DEMO
 
