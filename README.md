@@ -31,6 +31,11 @@ Every M365 defender ends up with the same scattered folder of half-remembered KQ
 
 ---
 
+<img width="3560" height="904" alt="attack-chain-flowchart" src="https://github.com/user-attachments/assets/64722be0-0d46-43ec-9873-153915ee9f7e" />
+
+
+---
+
 ## ⭐ Star this repo
 
 If a query here saves you even one hour during an incident, **star the repo** — it's the cheapest way to bookmark it, and starring means GitHub shows you when new detections drop. That's the whole deal: keep it in your back pocket, watch for updates.
