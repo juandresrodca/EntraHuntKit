@@ -20,7 +20,7 @@
 
 ---
 
-## Why this exists
+## Why 
 
 Every M365 defender ends up with the same scattered folder of half-remembered KQL — one query from a blog, one from a conference slide, one they wrote at 2am during an incident. **EntraHuntKit is that folder, curated and ATT&CK-mapped**, so the queries you reach for during a consent-phishing or BEC investigation are one paste away.
 
