@@ -116,6 +116,8 @@ These queries are for **defending tenants you are authorized to defend** — you
 
 New detections, better tuning, and confirmed IOCs (with sources) are all welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). The one hard rule: **every query must be accurate and paste-ready** — real tables, real columns, no invented schema.
 
+Found a query that is silently wrong, or an indicator that names something benign? Those are security problems here, not ordinary bugs — [SECURITY.md](SECURITY.md) covers how to report them privately, how indicators are sourced, and how to dispute a listing if you own the app or domain named.
+
 ---
 
 ## License
