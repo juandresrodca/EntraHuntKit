@@ -1,0 +1,15 @@
+blank_issues_enabled: true
+contact_links:
+  - name: A query is wrong, noisy, or silently returns nothing
+    url: https://github.com/juandresrodca/EntraHuntKit/issues/new
+    about: >
+      Open a normal issue and say which query and what you saw. A detection that is
+      quietly wrong is the worst failure mode here, so these get priority.
+  - name: Report a security problem privately
+    url: https://github.com/juandresrodca/EntraHuntKit/security/advisories/new
+    about: >
+      An indicator that names something benign, or anything you would rather not
+      discuss in public. See SECURITY.md for scope and the dispute process.
+  - name: Try the queries first
+    url: https://juandresrodca.github.io/EntraHuntKit/demo/
+    about: The live demo console — all detections in your browser, no tenant needed.

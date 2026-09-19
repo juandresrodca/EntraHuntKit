@@ -1,0 +1,102 @@
+name: "🧾 Submit an indicator (IOC)"
+description: Propose an entry for the ioc/ lists — an OAuth app ID, an inbox-rule pattern, a risky scope.
+title: "[ioc] "
+labels: ["ioc"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Indicators here get pasted into other people's hunts, so the bar is a
+        **public, checkable source**. Falsely flagging a legitimate app or domain is
+        worse than omitting it — see the sourcing policy in
+        [SECURITY.md](https://github.com/juandresrodca/EntraHuntKit/blob/main/SECURITY.md).
+
+        If you own an app or domain listed here and believe it is listed in error,
+        do not use this form — the dispute process is in SECURITY.md.
+
+  - type: dropdown
+    id: list
+    attributes:
+      label: Which list
+      options:
+        - ioc/malicious-oauth-app-ids.md
+        - ioc/suspicious-inbox-rule-patterns.md
+        - ioc/risky-graph-permission-scopes.md
+        - a new list (say which in the notes)
+    validations:
+      required: true
+
+  - type: input
+    id: indicator
+    attributes:
+      label: The indicator
+      description: The exact value — app ID (GUID), rule pattern, scope name.
+      placeholder: 00001111-aaaa-2222-bbbb-3333cccc4444
+    validations:
+      required: true
+
+  - type: input
+    id: name
+    attributes:
+      label: Display name it appears under
+      description: What a defender will actually see in their audit log.
+      placeholder: "\"Mail Backup Pro\" (consent-phishing app, 2026 campaign)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: confidence
+    attributes:
+      label: Confidence
+      description: >
+        Confirmed malicious means a named public report or your own IR case.
+        Abused-legitimate means a real product attackers reuse — those are listed
+        differently, because blocking them outright breaks tenants.
+      options:
+        - Confirmed malicious
+        - Legitimate but commonly abused
+        - Suspicious, needs a second opinion
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Public source URL
+      description: >
+        A vendor advisory, a CERT bulletin, a named threat-intel report, or a public
+        IR writeup. A link to a tweet or a screenshot is not enough on its own.
+      placeholder: https://…
+    validations:
+      required: true
+
+  - type: textarea
+    id: behaviour
+    attributes:
+      label: What it does when you see it
+      description: The behaviour a defender should expect, and what to check next.
+      placeholder: |
+        Requests Mail.ReadWrite, Mail.Send and offline_access on user consent, then
+        creates a hidden inbox rule. Pivot to query 6 (forwarding rules) for the same
+        mailbox in the hour after the consent event.
+    validations:
+      required: true
+
+  - type: input
+    id: first-seen
+    attributes:
+      label: First seen (optional)
+      description: Roughly when this indicator was first reported, if the source says.
+      placeholder: 2026-07
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Before you submit
+      options:
+        - label: The source above is public and names this indicator specifically.
+          required: true
+        - label: I would stand behind this listing if the owner of the app or domain disputed it.
+          required: true
+        - label: This contains no customer data, tenant identifiers or real user details.
+          required: true

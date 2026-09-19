@@ -1,0 +1,143 @@
+name: "🎯 Submit a hunting query"
+description: Propose a new KQL detection for Defender XDR or Sentinel.
+title: "[query] "
+labels: ["detection"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for adding to the kit. One hard rule applies here:
+        **every query must be accurate and paste-ready** — real tables, real columns,
+        no invented schema. A query that throws a schema error, or silently returns
+        nothing, costs an analyst trust and time.
+
+        Fill this in and we will turn it into a PR, or open the PR yourself and link
+        it here — see [CONTRIBUTING.md](https://github.com/juandresrodca/EntraHuntKit/blob/main/CONTRIBUTING.md).
+
+  - type: input
+    id: title
+    attributes:
+      label: Detection title
+      description: Short and descriptive, as it will read in the tactic README.
+      placeholder: Mailbox audit logging disabled on a VIP mailbox
+    validations:
+      required: true
+
+  - type: textarea
+    id: catches
+    attributes:
+      label: What it catches
+      description: One sentence, in plain English — the attacker behaviour, not the query mechanics.
+      placeholder: An admin turning off mailbox auditing, which blinds every downstream BEC detection.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tactic
+    attributes:
+      label: ATT&CK tactic
+      description: Which folder under `hunting/` it belongs in.
+      options:
+        - initial-access
+        - persistence
+        - defense-evasion
+        - credential-access
+        - discovery
+        - collection
+        - exfiltration
+        - not sure
+    validations:
+      required: true
+
+  - type: input
+    id: technique
+    attributes:
+      label: ATT&CK technique ID
+      description: One or more, comma separated. Sub-techniques welcome.
+      placeholder: T1562.008, T1098
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Sentinel
+        - Defender XDR
+        - Both (give the primary query, and the other in "Also in")
+    validations:
+      required: true
+
+  - type: input
+    id: table
+    attributes:
+      label: Primary table
+      description: >
+        Sentinel — SigninLogs, AuditLogs, OfficeActivity, IntuneAuditLogs,
+        MicrosoftGraphActivityLogs. Defender XDR — CloudAppEvents, AADSignInEventsBeta,
+        EmailEvents, DeviceEvents.
+      placeholder: OfficeActivity
+    validations:
+      required: true
+
+  - type: input
+    id: license
+    attributes:
+      label: License tier it needs
+      description: What a tenant must actually have for this data to exist.
+      placeholder: M365 audit (mailbox auditing on)
+    validations:
+      required: true
+
+  - type: textarea
+    id: kql
+    attributes:
+      label: The query
+      description: Paste the KQL exactly as it should appear in the repo.
+      render: kusto
+
+  - type: textarea
+    id: tuning
+    attributes:
+      label: Tuning / false positives
+      description: >
+        Not optional. What generates noise, how to baseline it, and what the
+        high-fidelity version of the signal looks like. A detection with no
+        false-positive guidance is not finished.
+      placeholder: |
+        Service accounts disable auditing during migrations. The high-fidelity signal is
+        a disable on a mailbox that is not part of a migration batch, by an account that
+        has never done it before, within an hour of a risky sign-in.
+    validations:
+      required: true
+
+  - type: input
+    id: also-in
+    attributes:
+      label: Also in (optional)
+      description: The equivalent on the other surface, if you know it.
+      placeholder: Defender XDR — CloudAppEvents where ActionType has "Set-MailboxAuditBypassAssociation"
+
+  - type: input
+    id: tested
+    attributes:
+      label: Tested where and when
+      description: Which surface you ran it against, and roughly when. Schemas move.
+      placeholder: Defender XDR Advanced Hunting, 2026-09-14
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Before you submit
+      options:
+        - label: I ran this query and it executed without a schema error.
+          required: true
+        - label: Every table and column is real — I verified anything I was unsure of against the Microsoft schema reference.
+          required: true
+        - label: This is defensive hunting logic for Entra ID, Intune or M365 — not exploitation tooling.
+          required: true
+        - label: The query contains no tenant identifiers, real user names or customer data.
+          required: true

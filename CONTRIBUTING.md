@@ -41,6 +41,10 @@ IOC lists live in [`ioc/`](ioc/). For **confirmed-malicious** indicators (OAuth 
 
 ## Submitting
 
+Not ready to open a PR? Use the issue forms — [submit a hunting query](https://github.com/juandresrodca/EntraHuntKit/issues/new?template=new_query.yml) or [submit an indicator](https://github.com/juandresrodca/EntraHuntKit/issues/new?template=new_ioc.yml). They ask for exactly what a merge needs: the tactic, the ATT&CK ID, the table, the tuning note, and where you tested it.
+
+To open the PR yourself:
+
 1. Fork, branch, add your query/IOC.
 2. Update the query count and ATT&CK coverage table in [README.md](README.md) if you added a new technique.
 3. Add a line to [CHANGELOG.md](CHANGELOG.md) under **Unreleased**.
