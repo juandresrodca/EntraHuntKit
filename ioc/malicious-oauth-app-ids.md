@@ -2,25 +2,55 @@
 
 Use this list to enrich the **illicit OAuth consent** hunt ([`hunting/persistence`](../hunting/persistence/README.md#4-illicit-oauth-application-consent)). Two kinds of entries:
 
-1. **First-party app IDs commonly abused / impersonated** in consent-phishing and token attacks. These IDs are *legitimate Microsoft apps* — they are listed so you can recognise them, not because the app itself is malicious. Attackers frequently piggyback on or spoof these to look trustworthy.
+1. **First-party app IDs commonly abused / impersonated** in consent-phishing and token attacks. These IDs are *legitimate Microsoft apps* — attackers piggyback on or spoof them to look trustworthy. They are **not** enumerated here; see [below](#microsoft-first-party-app-ids--resolve-them-upstream) for the maintained source.
 2. A **contribution template** for genuinely malicious app IDs sourced from your own IR or public threat intel. **Do not add an app ID here unless you have a citation.** Falsely flagging a legitimate SaaS app is worse than no entry.
 
 > ⚠️ **Accuracy over volume.** An IOC list that names innocent apps burns the analyst's trust. Every malicious entry must carry a source.
 
 ---
 
-## Well-known Microsoft first-party app IDs (recognition reference)
+## Microsoft first-party app IDs — resolve them upstream
 
-| App ID | App | Why it matters in hunts |
-|---|---|---|
-| `d3590ed6-52b3-4102-aeff-aad2292ab01c` | Microsoft Office | Extremely common; used as a client for token replay. High baseline volume. |
-| `1b730954-1685-4b74-9bfd-dac224a7b894` | Azure Active Directory PowerShell | Legit admin tooling **and** a favourite of recon/attack scripts. |
-| `1950a258-227b-4e31-a9cf-717495945fc2` | Microsoft Azure PowerShell | Same — legit automation and offensive tooling both use it. |
-| `04b07795-8ddb-461a-bbee-02f9e1bf7b46` | Microsoft Azure CLI | Common in automation; watch for interactive use from odd IPs. |
-| `de8bc8b5-d9f9-48b1-a8ad-b748da725064` | Microsoft Graph Command Line Tools | Delegated Graph access; abused by GraphRunner-style tooling. |
-| `14d82eec-204b-4c2f-b7e8-296a70dab67e` | Microsoft Graph | The resource most consent-phishing scopes target. |
+This repository does **not** keep its own table of Microsoft first-party app IDs. Microsoft
+publishes thousands of them and the set moves; a copy pasted here goes stale quietly, and a
+stale name attached to the right GUID is exactly the kind of wrong that survives review.
 
-*These are reference/benign. Alert on the **context** (who, which IP, which scopes), not the ID alone.*
+Use **[merill/microsoft-info](https://github.com/merill/microsoft-info)** instead — a
+daily-regenerated list of Microsoft first-party app names and their GUIDs, built from
+Microsoft Graph, the Entra docs `known-guids.json`, and the *Verify first-party Microsoft
+applications in sign-in reports* Learn article. It is community-run, MIT-licensed, and
+designed to be consumed by scripts and KQL rather than read.
+
+| Feed | Raw URL |
+|---|---|
+| First-party apps | `https://raw.githubusercontent.com/merill/microsoft-info/main/_info/MicrosoftApps.csv` (also `.json`) |
+| Graph **application** permissions | `https://raw.githubusercontent.com/merill/microsoft-info/main/_info/GraphAppRoles.csv` |
+| Graph **delegated** permissions | `https://raw.githubusercontent.com/merill/microsoft-info/main/_info/GraphDelegateRoles.csv` |
+
+`MicrosoftApps.csv` columns: `AppId`, `AppDisplayName`, `AppOwnerOrganizationId`, `Source`.
+
+### Resolving names at query time
+
+**Platform: Sentinel / Log Analytics.** `externaldata` is not available in Defender XDR
+advanced hunting — there, paste the handful of IDs a given hunt needs into a `dynamic()`
+list, or load the feed as a watchlist.
+
+```kql
+let firstParty = externaldata(AppId: string, AppDisplayName: string, AppOwnerOrganizationId: string, Source: string)
+    [@"https://raw.githubusercontent.com/merill/microsoft-info/main/_info/MicrosoftApps.csv"]
+    with (format="csv", ignoreFirstRecord=true);
+AuditLogs
+| where TimeGenerated > ago(30d)
+| where OperationName has "Consent to application"
+| extend AppId = tostring(TargetResources[0].id)
+| lookup kind=leftouter firstParty on AppId
+| project TimeGenerated, AppId, AppDisplayName, InitiatedBy, Result
+```
+
+A first-party ID in a consent event is **not a finding on its own**. Several of the
+highest-volume ones — Microsoft Office, Azure CLI, Azure PowerShell, the Graph command-line
+tools — are ordinary admin tooling *and* the clients that recon and token-replay scripts
+reach for. Alert on the **context**: who consented, from which IP, to which scopes.
 
 ---
 

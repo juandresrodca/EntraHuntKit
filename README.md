@@ -2,7 +2,7 @@
 
 <p align="center">
   <strong>SecLists, but for M365 defenders.</strong><br>
-  Curated, ATT&CK-mapped, paste-ready threat-hunting queries + IOC lists for <strong>Entra ID, Intune & Microsoft 365</strong>.<br>
+  Paste-ready, ATT&CK-mapped KQL threat-hunting queries + IOC lists for <strong>Entra ID, Intune & Microsoft 365</strong>.<br>
   Zero install — paste straight into <strong>Microsoft Defender XDR Advanced Hunting</strong> or <strong>Microsoft Sentinel</strong>.
 </p>
 
