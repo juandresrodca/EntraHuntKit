@@ -4,6 +4,10 @@ All notable changes to EntraHuntKit are documented here. Format loosely follows 
 
 ## [Unreleased]
 
+### Added
+
+- **ATT&CK Navigator layer** — `docs/attack-navigator/entrahuntkit-layer.json`, a layer-format 4.5 file covering the 20 techniques these 16 queries reach, loadable straight from a URL. Closes #4.
+
 - _Your next detection here — see [CONTRIBUTING.md](CONTRIBUTING.md)._
 
 ## [0.1.0] — 2026-08-04

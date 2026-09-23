@@ -1,0 +1,362 @@
+{
+  "name": "EntraHuntKit coverage",
+  "versions": {
+    "attack": "19",
+    "navigator": "5.3.2",
+    "layer": "4.5"
+  },
+  "domain": "enterprise-attack",
+  "description": "Techniques covered by the 16 paste-ready KQL hunting queries in EntraHuntKit (Entra ID, Intune, Exchange Online and the wider M365 stack). Each highlighted cell carries the query number it comes from and a link to the hunting folder that holds it. https://github.com/juandresrodca/EntraHuntKit",
+  "sorting": 0,
+  "layout": {
+    "layout": "side",
+    "aggregateFunction": "average",
+    "showID": false,
+    "showName": true,
+    "showAggregateScores": false,
+    "countUnscored": false,
+    "expandedSubtechniques": "all"
+  },
+  "hideDisabled": false,
+  "techniques": [
+    {
+      "techniqueID": "T1078",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Queries 2-3 — sign-in from an anonymising IP (Tor/VPN/proxy); impossible / atypical travel",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/initial-access/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/initial-access/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1078.004",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 1 — legacy authentication sign-ins (no modern auth, no MFA)",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/initial-access/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/initial-access/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1528",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 4 — illicit OAuth application consent",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/persistence/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/persistence/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1098",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 4 — illicit OAuth application consent (service principal granted standing access)",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/persistence/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/persistence/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1098.001",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 5 — credential or certificate added to an app / service principal",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/persistence/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/persistence/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1098.003",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 7 — privileged Entra role assignment",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/persistence/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/persistence/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1137.005",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 6 — new mailbox forwarding / redirect rule (BEC)",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/persistence/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/persistence/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1484.002",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 8 — federation trust / domain authentication change",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/persistence/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/persistence/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1556.009",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 9 — Conditional Access policy created, weakened, or disabled",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/defense-evasion/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/defense-evasion/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1562.007",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 9 — Conditional Access policy created, weakened, or disabled",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/defense-evasion/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/defense-evasion/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1562.001",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 10 — Intune compliance or configuration policy deleted / weakened",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/defense-evasion/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/defense-evasion/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1562.008",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 11 — mailbox audit logging disabled",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/defense-evasion/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/defense-evasion/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1621",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 12 — MFA-fatigue / push-bombing",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/credential-access/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/credential-access/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1110.003",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 13 — password spray",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/credential-access/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/credential-access/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1087.004",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 14 — directory enumeration via Microsoft Graph",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/discovery/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/discovery/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1069.003",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 14 — directory enumeration via Microsoft Graph (group enumeration)",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/discovery/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/discovery/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1114.003",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Queries 6 and 15 — forwarding rule (BEC); inbox rule that hides, deletes, or moves mail",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/collection/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/collection/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1564.008",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 15 — inbox rule that hides, deletes, or moves mail",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/collection/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/collection/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1567",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 16 — anomalous mass file download",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/exfiltration/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/exfiltration/"
+        }
+      ],
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1530",
+      "score": 1,
+      "color": "#9fef00",
+      "comment": "Query 16 — anomalous mass file download (data pulled from SharePoint / OneDrive)",
+      "enabled": true,
+      "metadata": [],
+      "links": [
+        {
+          "label": "EntraHuntKit — hunting/exfiltration/",
+          "url": "https://github.com/juandresrodca/EntraHuntKit/blob/main/hunting/exfiltration/"
+        }
+      ],
+      "showSubtechniques": false
+    }
+  ],
+  "gradient": {
+    "colors": [
+      "#0a0e1600",
+      "#9fef00"
+    ],
+    "minValue": 0,
+    "maxValue": 1
+  },
+  "legendItems": [
+    {
+      "label": "Covered by an EntraHuntKit query",
+      "color": "#9fef00"
+    }
+  ],
+  "metadata": [
+    {
+      "name": "queries",
+      "value": "16"
+    },
+    {
+      "name": "techniques",
+      "value": "20"
+    },
+    {
+      "name": "source",
+      "value": "https://github.com/juandresrodca/EntraHuntKit"
+    }
+  ],
+  "links": [
+    {
+      "label": "EntraHuntKit on GitHub",
+      "url": "https://github.com/juandresrodca/EntraHuntKit"
+    }
+  ],
+  "showTacticRowBackground": true,
+  "tacticRowBackground": "#0a0e16",
+  "selectTechniquesAcrossTactics": true,
+  "selectSubtechniquesWithParent": false,
+  "selectVisibleTechniques": false
+}

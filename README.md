@@ -70,6 +70,8 @@ If a query here saves you even one hour during an incident, **star the repo** �
 | [Collection](hunting/collection/) | 1 | `T1114.003` · `T1564.008` |
 | [Exfiltration](hunting/exfiltration/) | 1 | `T1567` · `T1530` |
 
+**See the coverage on the matrix** → load the [ATT&CK Navigator layer](docs/attack-navigator/) to light up all 20 techniques these 16 queries cover — and spot the gaps you still need to fill.
+
 **IOC reference lists** → [`ioc/`](ioc/): [malicious/abused OAuth app IDs](ioc/malicious-oauth-app-ids.md) · [suspicious inbox-rule patterns](ioc/suspicious-inbox-rule-patterns.md) · [high-risk Graph permission scopes](ioc/risky-graph-permission-scopes.md)
 
 ---
