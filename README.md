@@ -120,6 +120,8 @@ New detections, better tuning, and confirmed IOCs (with sources) are all welcome
 
 Found a query that is silently wrong, or an indicator that names something benign? Those are security problems here, not ordinary bugs — [SECURITY.md](SECURITY.md) covers how to report them privately, how indicators are sourced, and how to dispute a listing if you own the app or domain named.
 
+Participation is governed by the [Code of Conduct](CODE_OF_CONDUCT.md).
+
 ---
 
 ## License

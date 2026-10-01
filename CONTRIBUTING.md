@@ -53,3 +53,7 @@ To open the PR yourself:
 ## Scope
 
 Defensive / blue-team hunting for Entra ID, Intune, and M365 only. This repo is detection logic — not exploitation tooling, not red-team payloads.
+
+## Conduct
+
+Participation is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). Arguing that a detection is wrong is the point of the project and is always welcome; how that argument is made is what the Code of Conduct covers.
