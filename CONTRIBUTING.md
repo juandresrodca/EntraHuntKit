@@ -50,6 +50,13 @@ To open the PR yourself:
 3. Add a line to [CHANGELOG.md](CHANGELOG.md) under **Unreleased**.
 4. Open a PR describing what the detection catches and where you tested it (Defender XDR / Sentinel).
 
+[`.editorconfig`](.editorconfig) carries the file conventions, so most editors will
+get them right without being told: UTF-8, LF line endings, a final newline, and two
+spaces for indentation. Trailing whitespace is left untouched in markdown, because two
+trailing spaces are a hard line break there and stripping them would change how a
+query page renders. Nothing in the repo needs reformatting to satisfy it — it only
+stops a CRLF-flavoured editor turning a one-line fix into a whole-file diff.
+
 ## Scope
 
 Defensive / blue-team hunting for Entra ID, Intune, and M365 only. This repo is detection logic — not exploitation tooling, not red-team payloads.

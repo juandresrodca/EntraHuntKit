@@ -1,0 +1,38 @@
+# EditorConfig — https://editorconfig.org
+# Keeps the kit consistent across editors. Most of this repo is prose and
+# fenced KQL, so the rules that matter are the invisible ones: encoding,
+# line endings and a final newline.
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Hunting queries, IOC lists and docs are all markdown. Two trailing spaces
+# are a hard line break in markdown, so trimming them would silently change
+# how a page renders — leave them alone here and nowhere else.
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{yml,yaml}]
+indent_size = 2
+
+[*.json]
+indent_size = 2
+
+[*.{html,svg}]
+indent_size = 2
+
+# Queries currently live in fenced blocks inside hunting/*/README.md. If one is
+# ever extracted to its own file, four spaces is the convention — it keeps a
+# piped KQL operator readable once it wraps.
+[*.kql]
+indent_size = 4
+
+[LICENSE]
+insert_final_newline = true
