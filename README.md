@@ -64,13 +64,15 @@ If a query here saves you even one hour during an incident, **star the repo** �
 |---|---|---|
 | [Initial Access](hunting/initial-access/) | 3 | `T1078` · `T1078.004` |
 | [Persistence](hunting/persistence/) | 5 | `T1528` · `T1098` · `T1098.001` · `T1098.003` · `T1137.005` · `T1484.002` |
-| [Defense Evasion](hunting/defense-evasion/) | 3 | `T1562.001` · `T1562.007` · `T1562.008` |
+| [Defense Evasion](hunting/defense-evasion/) | 3 | `T1556.009` · `T1562.001` · `T1562.007` · `T1562.008` |
 | [Credential Access](hunting/credential-access/) | 2 | `T1110.003` · `T1621` |
-| [Discovery](hunting/discovery/) | 1 | `T1087.004` |
+| [Discovery](hunting/discovery/) | 1 | `T1069.003` · `T1087.004` |
 | [Collection](hunting/collection/) | 1 | `T1114.003` · `T1564.008` |
 | [Exfiltration](hunting/exfiltration/) | 1 | `T1567` · `T1530` |
 
-**See the coverage on the matrix** → load the [ATT&CK Navigator layer](docs/attack-navigator/) to light up all 20 techniques these 16 queries cover — and spot the gaps you still need to fill.
+**The full coverage index** → [`docs/coverage.md`](docs/coverage.md): every technique, the table and licence tier each query needs, which queries run on which platform, and the four tactics with no coverage written out as named candidate detections.
+
+**See it on the matrix** → load the [ATT&CK Navigator layer](docs/attack-navigator/) to light up all 20 techniques these 16 queries cover — and spot the gaps you still need to fill.
 
 **IOC reference lists** → [`ioc/`](ioc/): [malicious/abused OAuth app IDs](ioc/malicious-oauth-app-ids.md) · [suspicious inbox-rule patterns](ioc/suspicious-inbox-rule-patterns.md) · [high-risk Graph permission scopes](ioc/risky-graph-permission-scopes.md)
 
