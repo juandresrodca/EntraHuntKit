@@ -32,6 +32,12 @@ Add your query to the right ATT&CK-tactic folder under [`hunting/`](hunting/), f
 
 Every query needs all five: title, ATT&CK ID, "what it catches", the KQL, and a tuning note. The tuning note is not optional — a detection with no false-positive guidance isn't finished.
 
+`N` is a single sequence across the whole repository, not per folder — the sixteen
+existing queries run 1 to 16, so a new one takes 17 wherever it lands.
+[`docs/query-format.md`](docs/query-format.md) is the full reference: every field,
+the exact punctuation of the `**ATT&CK:**` line, the table vocabulary each platform
+accepts, the `**Tested:**` convention, and the checklist a review runs.
+
 ## Contributing IOCs
 
 IOC lists live in [`ioc/`](ioc/). For **confirmed-malicious** indicators (OAuth app IDs, sender domains, etc.):

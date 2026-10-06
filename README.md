@@ -120,6 +120,13 @@ These queries are for **defending tenants you are authorized to defend** — you
 
 New detections, better tuning, and confirmed IOCs (with sources) are all welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). The one hard rule: **every query must be accurate and paste-ready** — real tables, real columns, no invented schema.
 
+**The format in full** → [`docs/query-format.md`](docs/query-format.md): every field
+the submission form asks for and where it lands in the tree, the ATT&CK ID pattern,
+the table vocabulary per platform, the bar a tuning note has to clear, and the two
+conventions the repository had never written down — that query numbers are one
+sequence across all seven folders, so the next one is 17, and where the *tested
+where and when* answer goes.
+
 Found a query that is silently wrong, or an indicator that names something benign? Those are security problems here, not ordinary bugs — [SECURITY.md](SECURITY.md) covers how to report them privately, how indicators are sourced, and how to dispute a listing if you own the app or domain named.
 
 Participation is governed by the [Code of Conduct](CODE_OF_CONDUCT.md).
