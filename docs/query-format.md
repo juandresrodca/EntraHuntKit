@@ -263,8 +263,9 @@ checked by pattern alone.
 
 ## The reviewer's checklist
 
-What a merge is checked against, and what the planned metadata lint should
-automate — every line but the last two is checkable by pattern:
+What a merge is checked against, and what the metadata lint proposed in
+[#7](https://github.com/juandresrodca/EntraHuntKit/issues/7) should automate —
+every line but the last two is checkable by pattern:
 
 - [ ] The heading is `## N. Title`, `N` is the next number in the repository-wide
       sequence, and no existing number changed.
