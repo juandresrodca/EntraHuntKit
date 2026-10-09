@@ -1,0 +1,26 @@
+# Normalise line endings: LF in the repo, LF in the working tree.
+* text=auto eol=lf
+
+# Hunting queries and IOC lists are markdown. The KQL lives in fenced blocks
+# inside these pages, so there is no query file type to declare separately —
+# see docs/query-format.md for the structure a page is expected to follow.
+*.md text eol=lf
+
+# Issue forms and any workflow definitions, parsed by GitHub on Linux.
+*.yml  text eol=lf
+*.yaml text eol=lf
+
+# The ATT&CK Navigator layer, read as JSON by navigator.mitre.org.
+*.json text eol=lf
+
+# Demo page, its poster and the coverage artwork.
+*.html text eol=lf
+*.svg  text eol=lf
+
+# Binaries — explicit, so nothing depends on git's content sniffing. The demo
+# capture is the only one tracked today; the raster entries are here so a proof
+# screenshot dropped into docs/img/ later is never line-ending normalised.
+*.mp4 binary
+*.png binary
+*.jpg binary
+*.gif binary
