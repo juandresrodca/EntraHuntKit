@@ -284,7 +284,12 @@ every line but the last two is checkable by pattern:
       ISO date.
 - [ ] The query count and ATT&CK coverage table in [`README.md`](../README.md),
       [`docs/coverage.md`](coverage.md) and the
-      [Navigator layer](attack-navigator/) are updated in the same change.
+      [Navigator layer](attack-navigator/) are updated in the same change, **and all
+      three count by [the counting rule](coverage.md#the-counting-rule)** — regenerate
+      them with the commands in
+      [Regenerating this page](coverage.md#regenerating-this-page) rather than editing
+      the figures by hand. Saying only that the three must move together is what let
+      three different counts coexist in [#8](https://github.com/juandresrodca/EntraHuntKit/issues/8).
 - [ ] A line is added to [`CHANGELOG.md`](../CHANGELOG.md) under **Unreleased**.
 
 The accuracy rule sits above all of it: a query that throws a schema error, or

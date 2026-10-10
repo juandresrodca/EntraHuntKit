@@ -10,7 +10,7 @@ more usefully, where you are not.
 | **File** | [`entrahuntkit-layer.json`](entrahuntkit-layer.json) |
 | **Layer format** | 4.5 (Navigator 5.x) |
 | **Domain** | `enterprise-attack`, ATT&CK v19 |
-| **Techniques highlighted** | 20, from 16 queries |
+| **Techniques highlighted** | 20, from 16 queries — the full declared set, [see below](#what-is-in-the-layer) |
 
 ---
 
@@ -38,6 +38,18 @@ Hover any lime cell to see which query covers it; the context menu links straigh
 
 ## What is in the layer
 
+`techniques[]` holds every technique the sixteen queries cover — all twenty of them, by
+[the counting rule](../coverage.md#the-counting-rule) in the coverage index, which is the
+one definition this layer, that page and the [README](../../README.md#attck-coverage)
+all count by. The layer adds nothing and drops nothing: if it carries a technique no query
+declares, or misses one that is declared, the layer is out of date.
+
+A parent technique is highlighted only where a query names the parent itself — `T1078` and
+`T1098` are in, `T1562` is not, because every query that reaches it declares a
+sub-technique. The parent cell is not lit by inference from its children; that is rule 2 of
+the counting rule, and it is why `T1562`'s own cell stays dark while three of its
+sub-technique cells are lit.
+
 Sub-techniques are expanded on load (`expandedSubtechniques: "all"`), so a highlighted
 sub-technique is visible without clicking its parent open. Techniques are **not** pinned to a
 single tactic column: a technique that ATT&CK lists under several tactics highlights in all of
@@ -46,7 +58,7 @@ them, which is the honest picture of where the query would help you.
 | EntraHuntKit folder | Techniques | Queries |
 |---|---|---|
 | [`hunting/initial-access/`](../../hunting/initial-access/) | `T1078` · `T1078.004` | 1–3 |
-| [`hunting/persistence/`](../../hunting/persistence/) | `T1528` · `T1098` · `T1098.001` · `T1098.003` · `T1137.005` · `T1484.002` | 4–8 |
+| [`hunting/persistence/`](../../hunting/persistence/) | `T1098` · `T1098.001` · `T1098.003` · `T1114.003` · `T1137.005` · `T1484.002` · `T1528` | 4–8 |
 | [`hunting/defense-evasion/`](../../hunting/defense-evasion/) | `T1556.009` · `T1562.001` · `T1562.007` · `T1562.008` | 9–11 |
 | [`hunting/credential-access/`](../../hunting/credential-access/) | `T1110.003` · `T1621` | 12–13 |
 | [`hunting/discovery/`](../../hunting/discovery/) | `T1069.003` · `T1087.004` | 14 |
@@ -66,7 +78,10 @@ update this layer in the same pull request:**
 
 1. Add the technique to `techniques[]` with `"score": 1`, `"color": "#9fef00"`, a `comment`
    naming the query number, and a `links` entry pointing at its `hunting/` folder.
-2. Bump `metadata` → `queries` and `techniques` to the new counts.
+2. Bump `metadata` → `queries` and `techniques` to the new counts, recomputed with the
+   commands in [Regenerating this page](../coverage.md#regenerating-this-page) rather than
+   by adding one — the ID in a MITRE link target is not a declaration, and counting by eye
+   is how the three places drifted apart in [#8](https://github.com/juandresrodca/EntraHuntKit/issues/8).
 3. Re-load the layer in the Navigator once before opening the pull request. A technique ID that
    does not exist in the ATT&CK version named in `versions.attack` is dropped silently — the
    layer still loads, the cell just never lights up.

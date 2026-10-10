@@ -63,16 +63,18 @@ If a query here saves you even one hour during an incident, **star the repo** �
 | Tactic | Queries | Techniques covered |
 |---|---|---|
 | [Initial Access](hunting/initial-access/) | 3 | `T1078` · `T1078.004` |
-| [Persistence](hunting/persistence/) | 5 | `T1528` · `T1098` · `T1098.001` · `T1098.003` · `T1137.005` · `T1484.002` |
+| [Persistence](hunting/persistence/) | 5 | `T1098` · `T1098.001` · `T1098.003` · `T1114.003` · `T1137.005` · `T1484.002` · `T1528` |
 | [Defense Evasion](hunting/defense-evasion/) | 3 | `T1556.009` · `T1562.001` · `T1562.007` · `T1562.008` |
 | [Credential Access](hunting/credential-access/) | 2 | `T1110.003` · `T1621` |
 | [Discovery](hunting/discovery/) | 1 | `T1069.003` · `T1087.004` |
 | [Collection](hunting/collection/) | 1 | `T1114.003` · `T1564.008` |
-| [Exfiltration](hunting/exfiltration/) | 1 | `T1567` · `T1530` |
+| [Exfiltration](hunting/exfiltration/) | 1 | `T1530` · `T1567` |
 
-**The full coverage index** → [`docs/coverage.md`](docs/coverage.md): every technique, the table and licence tier each query needs, which queries run on which platform, and the four tactics with no coverage written out as named candidate detections.
+Twenty distinct techniques across the sixteen queries. Counted by the rule in [`docs/coverage.md`](docs/coverage.md#the-counting-rule) — an ID counts where a query names it in the link text of its `**ATT&CK:**` line, sub-techniques count separately from parents, and an ID counts under every tactic that declares it. That last clause is why `T1114.003` appears under both Persistence and Collection: the BEC forwarding rule (query 6) and the hide-and-delete rule (query 15) both detect mail collection, and query 6 lives under Persistence because persistence is what the rule is for. The rows therefore total twenty-one while the distinct count is twenty.
 
-**See it on the matrix** → load the [ATT&CK Navigator layer](docs/attack-navigator/) to light up all 20 techniques these 16 queries cover — and spot the gaps you still need to fill.
+**The full coverage index** → [`docs/coverage.md`](docs/coverage.md): every technique, the table and licence tier each query needs, which queries run on which platform, and the four tactics with no query of their own — three of them with no coverage at all — written out as named candidate detections.
+
+**See it on the matrix** → load the [ATT&CK Navigator layer](docs/attack-navigator/) to light up the same 20 techniques these 16 queries cover — and spot the gaps you still need to fill.
 
 **IOC reference lists** → [`ioc/`](ioc/): [malicious/abused OAuth app IDs](ioc/malicious-oauth-app-ids.md) · [suspicious inbox-rule patterns](ioc/suspicious-inbox-rule-patterns.md) · [high-risk Graph permission scopes](ioc/risky-graph-permission-scopes.md)
 

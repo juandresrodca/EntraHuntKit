@@ -10,29 +10,56 @@ This page adds the two dimensions the matrix cannot show: the table and licence 
 query needs, and the gaps written out as candidate detections rather than as dark cells.
 
 Every figure here is derived from the `**ATT&CK:**`, `**Platform:**` and
-`**License:**` lines of the queries themselves — see
-[Regenerating this page](#regenerating-this-page).
+`**License:**` lines of the queries themselves, by [the counting rule](#the-counting-rule)
+stated below — see also [Regenerating this page](#regenerating-this-page).
+
+## The counting rule
+
+Coverage is stated in three places: this page, the [README](../README.md#attck-coverage)
+table, and the [Navigator layer](attack-navigator/entrahuntkit-layer.json). This is the
+definition all three derive from. Where one of them disagrees with it, that one is wrong.
+
+> **Counting rule.** A technique is covered when a query **declares its ID in the link
+> text** of that query's `**ATT&CK:**` line. Nothing else counts.
+>
+> 1. **Sub-techniques count separately from their parents.** `T1562.001` and `T1562` would
+>    be two entries, not one.
+> 2. **A parent counts only where a query names the parent itself.** It is never inferred
+>    from a covered sub-technique. `T1078` and `T1098` are here because queries 2, 3 and 4
+>    declare those parents directly; `T1562` is not, because every query that touches it
+>    declares a sub-technique.
+> 3. **A technique counts in every tactic that declares it.** A query declares what it
+>    detects, not the techniques of the folder it sits in, so one ID can appear in two
+>    rows — which is why the rows below total more than the distinct count.
+> 4. **The ID in a MITRE link target is not a declaration.** Every ATT&CK URL carries the
+>    ID as path segments — `https://attack.mitre.org/techniques/T1562/007/` — so an
+>    extraction that reads the whole line counts `T1562` as covered when no query named it.
+>    Strip the link targets first. [Regenerating this page](#regenerating-this-page) does.
+>
+> Across the sixteen queries this gives **twenty distinct technique IDs**, which is the
+> figure the Navigator layer's `techniques[]` carries and the figure the README quotes.
 
 ## By tactic
 
 | Tactic | Queries | Techniques |
 |---|---|---|
 | [Initial Access](../hunting/initial-access/) | 3 | `T1078` · `T1078.004` |
-| [Credential Access](../hunting/credential-access/) | 2 | `T1110` · `T1110.003` · `T1621` |
-| [Persistence](../hunting/persistence/) | 5 | `T1098` · `T1098.001` · `T1098.003` · `T1114` · `T1114.003` · `T1137` · `T1137.005` · `T1484` · `T1484.002` · `T1528` |
+| [Credential Access](../hunting/credential-access/) | 2 | `T1110.003` · `T1621` |
+| [Persistence](../hunting/persistence/) | 5 | `T1098` · `T1098.001` · `T1098.003` · `T1114.003` · `T1137.005` · `T1484.002` · `T1528` |
 | Privilege Escalation | **0** | reached indirectly by `T1098.003` (query 7), which ATT&CK lists under both tactics — see [gaps](#gaps-worth-filling) |
-| [Defense Evasion](../hunting/defense-evasion/) | 3 | `T1556` · `T1556.009` · `T1562` · `T1562.001` · `T1562.007` · `T1562.008` |
-| [Discovery](../hunting/discovery/) | 1 | `T1069` · `T1069.003` · `T1087` · `T1087.004` |
-| [Collection](../hunting/collection/) | 1 | `T1114` · `T1114.003` · `T1564` · `T1564.008` |
+| [Defense Evasion](../hunting/defense-evasion/) | 3 | `T1556.009` · `T1562.001` · `T1562.007` · `T1562.008` |
+| [Discovery](../hunting/discovery/) | 1 | `T1069.003` · `T1087.004` |
+| [Collection](../hunting/collection/) | 1 | `T1114.003` · `T1564.008` |
 | [Exfiltration](../hunting/exfiltration/) | 1 | `T1530` · `T1567` |
 | Execution | **0** | [gap](#gaps-worth-filling) |
 | Lateral Movement | **0** | [gap](#gaps-worth-filling) |
 | Impact | **0** | [gap](#gaps-worth-filling) |
 
-Twenty distinct techniques, counting sub-techniques separately and parents only where a
-query names the parent directly. `T1114.003` is reached twice — the forwarding rule in
-query 6 and the hide-and-delete rule in query 15 — so the query count per tactic adds up
-to sixteen while the technique list does not.
+Twenty distinct techniques under [the counting rule](#the-counting-rule) above. The rows
+total twenty-one because `T1114.003` is reached twice — the forwarding rule in query 6,
+which lives in `hunting/persistence/` because persistence is what the rule is *for*, and
+the hide-and-delete rule in query 15 in `hunting/collection/`. So the query count per
+tactic adds up to sixteen while the technique list does not.
 
 Three tactics have no query and no indirect coverage. That is not an oversight to be
 embarrassed about, it is where the next pull request should go, so each one is written
@@ -175,21 +202,32 @@ The tables are derived from the queries, so they can be rebuilt rather than reme
 From the repository root:
 
 ```bash
-# query count and technique list per tactic folder
+# query count and technique list per tactic folder.
+# sed strips the (https://...) link targets before the IDs are read, so the MITRE URL
+# path segments are not counted as declarations -- rule 4 above.
 for d in hunting/*/; do
   n=$(grep -cE '^## [0-9]+\. ' "$d/README.md")
-  t=$(grep -oE 'T[0-9]{4}(\.[0-9]{3})?' "$d/README.md" | sort -u | paste -sd' ')
+  t=$(grep -hE '^\*\*ATT&CK:\*\*' "$d/README.md" \
+        | sed -E 's#\(https?://[^)]*\)##g' \
+        | grep -oE 'T[0-9]{4}(\.[0-9]{3})?' | sort -u | paste -sd' ')
   printf '%-20s %2s  %s\n' "$(basename "$d")" "$n" "$t"
 done
+
+# the repository-wide distinct count the counting rule defines -- prints 20
+grep -hE '^\*\*ATT&CK:\*\*' hunting/*/README.md \
+  | sed -E 's#\(https?://[^)]*\)##g' \
+  | grep -oE 'T[0-9]{4}(\.[0-9]{3})?' | sort -u | wc -l
 
 # every source table, and how many query blocks open with it
 # (a `let` row is query 12's variable preamble, not a table)
 grep -A1 -h '^```kql' hunting/*/README.md | grep -oE '^[A-Za-z]+' | sort | uniq -c
 ```
 
-Run both after adding a query and reconcile the three places coverage is stated: this
+Run all three after adding a query and reconcile the three places coverage is stated: this
 page, the table in the [README](../README.md#attck-coverage), and the
 [Navigator layer](attack-navigator/entrahuntkit-layer.json) with its `metadata` counts.
+All three count by [the rule above](#the-counting-rule); if a figure disagrees with what
+these commands print, the figure is the thing to change.
 A query added without updating all three leaves the repository claiming coverage it has
 or hiding coverage it does not — both of which cost a reader more than the missing query
 did.
