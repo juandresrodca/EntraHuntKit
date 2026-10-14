@@ -6,6 +6,7 @@ All notable changes to EntraHuntKit are documented here. Format loosely follows 
 
 ### Added
 
+- **A pull request template** — `.github/pull_request_template.md`. The checklists are the reviewer's checklist from [`docs/query-format.md`](docs/query-format.md#the-reviewers-checklist), reordered to the way a submission is read, with the coverage section naming all three places a count lives and pointing at the regeneration commands rather than at hand-editing. The repository had two issue forms and a format reference but nothing in front of someone opening a pull request, and with no CI here every box is checked by a person — so the template asks for the query's actual output rather than for a green tick. Cross-linked from the README and from `CONTRIBUTING.md`'s submission steps. Relates to #7.
 - **ATT&CK Navigator layer** — `docs/attack-navigator/entrahuntkit-layer.json`, a layer-format 4.5 file covering the 20 techniques these 16 queries reach, loadable straight from a URL. Closes #4.
 
 ### Changed

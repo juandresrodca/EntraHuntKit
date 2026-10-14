@@ -56,6 +56,14 @@ To open the PR yourself:
 3. Add a line to [CHANGELOG.md](CHANGELOG.md) under **Unreleased**.
 4. Open a PR describing what the detection catches and where you tested it (Defender XDR / Sentinel).
 
+The [pull request template](.github/pull_request_template.md) asks for all four and
+nothing you have not already been asked for: it is the checklist from
+[`docs/query-format.md`](docs/query-format.md#the-reviewers-checklist) in the order a
+reviewer reads a submission. There is no CI in this repository, so those boxes are
+checked by a person — which is why the template asks you to paste what the query
+returned rather than to point at a green tick. Delete whichever sections do not apply;
+a docs-only change needs the first one alone.
+
 [`.editorconfig`](.editorconfig) carries the file conventions, so most editors will
 get them right without being told: UTF-8, LF line endings, a final newline, and two
 spaces for indentation. Trailing whitespace is left untouched in markdown, because two

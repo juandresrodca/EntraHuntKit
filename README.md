@@ -129,6 +129,12 @@ conventions the repository had never written down — that query numbers are one
 sequence across all seven folders, so the next one is 17, and where the *tested
 where and when* answer goes.
 
+**Opening a pull request** → [`.github/pull_request_template.md`](.github/pull_request_template.md)
+fills the description in for you. Its checklists are the reviewer's checklist from
+`docs/query-format.md`, in the order a submission is read, including the three places
+coverage has to move together. Most of it is deletable: a docs-only change needs the
+first section and nothing else.
+
 Found a query that is silently wrong, or an indicator that names something benign? Those are security problems here, not ordinary bugs — [SECURITY.md](SECURITY.md) covers how to report them privately, how indicators are sourced, and how to dispute a listing if you own the app or domain named.
 
 Participation is governed by the [Code of Conduct](CODE_OF_CONDUCT.md).
