@@ -137,7 +137,7 @@ first section and nothing else.
 
 Found a query that is silently wrong, or an indicator that names something benign? Those are security problems here, not ordinary bugs — [SECURITY.md](SECURITY.md) covers how to report them privately, how indicators are sourced, and how to dispute a listing if you own the app or domain named.
 
-Participation is governed by the [Code of Conduct](CODE_OF_CONDUCT.md).
+Participation is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). What has landed since the last curation milestone, and what is queued for the next one, is in [CHANGELOG.md](CHANGELOG.md) — anything a defender would notice belongs there under *Unreleased* in the same pull request.
 
 ---
 
