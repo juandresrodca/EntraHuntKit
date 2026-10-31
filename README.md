@@ -3,7 +3,7 @@
 <p align="center">
   <strong>SecLists, but for M365 defenders.</strong><br>
   Paste-ready, ATT&CK-mapped KQL threat-hunting queries + IOC lists for <strong>Entra ID, Intune & Microsoft 365</strong>.<br>
-  Zero install — paste straight into <strong>Microsoft Defender XDR Advanced Hunting</strong> or <strong>Microsoft Sentinel</strong>.
+  Zero install, paste straight into <strong>Microsoft Defender XDR Advanced Hunting</strong> or <strong>Microsoft Sentinel</strong>.
 </p>
 
 <p align="center">
@@ -15,19 +15,19 @@
 </p>
 
 <p align="center">
-  <em>Entra ID · Intune · Exchange Online · SharePoint · the whole M365 stack — the name says Entra, the coverage doesn't stop there.</em>
+  <em>Entra ID · Intune · Exchange Online · SharePoint · the whole M365 stack. The name says Entra, the coverage doesn't stop there.</em>
 </p>
 
 ---
 
 ## Why 
 
-Every M365 defender ends up with the same scattered folder of half-remembered KQL — one query from a blog, one from a conference slide, one they wrote at 2am during an incident. **EntraHuntKit is that folder, curated and ATT&CK-mapped**, so the queries you reach for during a consent-phishing or BEC investigation are one paste away.
+Every M365 defender ends up with the same scattered folder of half-remembered KQL: one query from a blog, one from a conference slide, one they wrote at 2am during an incident. **EntraHuntKit is that folder, curated and ATT&CK-mapped**, so the queries you reach for during a consent-phishing or BEC investigation are one paste away.
 
-- 🎯 **Plugs into tools you already run** — Defender XDR Advanced Hunting & Sentinel. No agent, no install, no new license to hunt with what you have.
-- 🗂️ **Organised by [MITRE ATT&CK](https://attack.mitre.org/) tactic** — walk the kill chain from initial access to exfiltration.
-- ✅ **Accurate & paste-ready** — real tables, real columns, real Entra audit operations. No invented schema.
-- 🔁 **Continuously updated** — new detections land as the threats do. ⭐ **Star it to bookmark it and get the updates.**
+- 🎯 **Plugs into tools you already run**: Defender XDR Advanced Hunting & Sentinel. No agent, no install, no new license to hunt with what you have.
+- 🗂️ **Organised by [MITRE ATT&CK](https://attack.mitre.org/) tactic**: walk the kill chain from initial access to exfiltration.
+- ✅ **Accurate & paste-ready**: real tables, real columns, real Entra audit operations. No invented schema.
+- 🔁 **Continuously updated**: new detections land as the threats do. ⭐ **Star it to bookmark it and get the updates.**
 
 ---
 
@@ -38,7 +38,7 @@ Every M365 defender ends up with the same scattered folder of half-remembered KQ
 
 ## ⭐ Star this repo
 
-If a query here saves you even one hour during an incident, **star the repo** — it's the cheapest way to bookmark it, and starring means GitHub shows you when new detections drop. That's the whole deal: keep it in your back pocket, watch for updates.
+If a query here saves you even one hour during an incident, **star the repo**, the cheapest way to bookmark it, and starring means GitHub shows you when new detections drop. That's the whole deal: keep it in your back pocket, watch for updates.
 
 ---
 
@@ -52,9 +52,9 @@ If a query here saves you even one hour during an incident, **star the repo** �
 ### In Microsoft Sentinel
 1. Open your **Log Analytics / Sentinel** workspace → **Logs**.
 2. Grab a query tagged **Sentinel** (tables like `SigninLogs`, `AuditLogs`, `OfficeActivity`, `IntuneAuditLogs`).
-3. Paste, run, and — once tuned — click **New alert rule → Create Sentinel alert** to operationalise it.
+3. Paste, run, and, once tuned, click **New alert rule → Create Sentinel alert** to operationalise it.
 
-> Each query names the **table**, the **platform**, and the **license tier** it needs, plus an "Also in" pointer to the other surface. Read the tuning note before alerting — thresholds here are starting points, not gospel.
+> Each query names the **table**, the **platform**, and the **license tier** it needs, plus an "Also in" pointer to the other surface. Read the tuning note before alerting: thresholds here are starting points, not gospel.
 
 ---
 
@@ -70,11 +70,11 @@ If a query here saves you even one hour during an incident, **star the repo** �
 | [Collection](hunting/collection/) | 1 | `T1114.003` · `T1564.008` |
 | [Exfiltration](hunting/exfiltration/) | 1 | `T1530` · `T1567` |
 
-Twenty distinct techniques across the sixteen queries. Counted by the rule in [`docs/coverage.md`](docs/coverage.md#the-counting-rule) — an ID counts where a query names it in the link text of its `**ATT&CK:**` line, sub-techniques count separately from parents, and an ID counts under every tactic that declares it. That last clause is why `T1114.003` appears under both Persistence and Collection: the BEC forwarding rule (query 6) and the hide-and-delete rule (query 15) both detect mail collection, and query 6 lives under Persistence because persistence is what the rule is for. The rows therefore total twenty-one while the distinct count is twenty.
+Twenty distinct techniques across the sixteen queries. Counted by the rule in [`docs/coverage.md`](docs/coverage.md#the-counting-rule): an ID counts where a query names it in the link text of its `**ATT&CK:**` line, sub-techniques count separately from parents, and an ID counts under every tactic that declares it. That last clause is why `T1114.003` appears under both Persistence and Collection: the BEC forwarding rule (query 6) and the hide-and-delete rule (query 15) both detect mail collection, and query 6 lives under Persistence because persistence is what the rule is for. The rows therefore total twenty-one while the distinct count is twenty.
 
-**The full coverage index** → [`docs/coverage.md`](docs/coverage.md): every technique, the table and licence tier each query needs, which queries run on which platform, and the four tactics with no query of their own — three of them with no coverage at all — written out as named candidate detections.
+**The full coverage index** → [`docs/coverage.md`](docs/coverage.md): every technique, the table and licence tier each query needs, which queries run on which platform, and the four tactics with no query of their own (three of them with no coverage at all), written out as named candidate detections.
 
-**See it on the matrix** → load the [ATT&CK Navigator layer](docs/attack-navigator/) to light up the same 20 techniques these 16 queries cover — and spot the gaps you still need to fill.
+**See it on the matrix** → load the [ATT&CK Navigator layer](docs/attack-navigator/) to light up the same 20 techniques these 16 queries cover, and spot the gaps you still need to fill.
 
 **IOC reference lists** → [`ioc/`](ioc/): [malicious/abused OAuth app IDs](ioc/malicious-oauth-app-ids.md) · [suspicious inbox-rule patterns](ioc/suspicious-inbox-rule-patterns.md) · [high-risk Graph permission scopes](ioc/risky-graph-permission-scopes.md)
 
@@ -88,7 +88,7 @@ Twenty distinct techniques across the sixteen queries. Counted by the rule in [`
 
 ## DEMO
 
-**▶ [Open the live demo console →](https://juandresrodca.github.io/EntraHuntKit/demo/)** — explore all 16 detections in your browser. Zero install, no tenant needed.
+**▶ [Open the live demo console →](https://juandresrodca.github.io/EntraHuntKit/demo/)**: explore all 16 detections in your browser. Zero install, no tenant needed.
 
 Or watch the 48-second walkthrough:
 
@@ -106,26 +106,26 @@ Or watch the 48-second walkthrough:
 
 Defensive / blue-team hunting for the M365 attack surface:
 
-- **Entra ID** — risky sign-ins, legacy auth, password spray, MFA fatigue, illicit OAuth consent, app-credential backdoors, privileged role grants, federation tampering.
-- **Intune / MDM** — compliance & configuration policy tampering that undermines device-based Conditional Access.
-- **Exchange Online / M365** — BEC inbox rules (forward, redirect, hide, delete), mailbox audit disable, mass mail/file exfiltration.
+- **Entra ID**: risky sign-ins, legacy auth, password spray, MFA fatigue, illicit OAuth consent, app-credential backdoors, privileged role grants, federation tampering.
+- **Intune / MDM**: compliance & configuration policy tampering that undermines device-based Conditional Access.
+- **Exchange Online / M365**: BEC inbox rules (forward, redirect, hide, delete), mailbox audit disable, mass mail/file exfiltration.
 
 ---
 
 ## Authorized use only
 
-These queries are for **defending tenants you are authorized to defend** — your own environment or one you have explicit permission to protect. They are detection/hunting logic, not exploitation tooling. Test in a non-production workspace first and tune thresholds to your own baseline before wiring anything to an alert or automated response.
+These queries are for **defending tenants you are authorized to defend**: your own environment or one you have explicit permission to protect. They are detection/hunting logic, not exploitation tooling. Test in a non-production workspace first and tune thresholds to your own baseline before wiring anything to an alert or automated response.
 
 ---
 
 ## Contributing
 
-New detections, better tuning, and confirmed IOCs (with sources) are all welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). The one hard rule: **every query must be accurate and paste-ready** — real tables, real columns, no invented schema.
+New detections, better tuning, and confirmed IOCs (with sources) are all welcome, see [CONTRIBUTING.md](CONTRIBUTING.md). The one hard rule: **every query must be accurate and paste-ready**: real tables, real columns, no invented schema.
 
 **The format in full** → [`docs/query-format.md`](docs/query-format.md): every field
 the submission form asks for and where it lands in the tree, the ATT&CK ID pattern,
 the table vocabulary per platform, the bar a tuning note has to clear, and the two
-conventions the repository had never written down — that query numbers are one
+conventions the repository had never written down: that query numbers are one
 sequence across all seven folders, so the next one is 17, and where the *tested
 where and when* answer goes.
 
@@ -135,14 +135,14 @@ fills the description in for you. Its checklists are the reviewer's checklist fr
 coverage has to move together. Most of it is deletable: a docs-only change needs the
 first section and nothing else.
 
-Found a query that is silently wrong, or an indicator that names something benign? Those are security problems here, not ordinary bugs — [SECURITY.md](SECURITY.md) covers how to report them privately, how indicators are sourced, and how to dispute a listing if you own the app or domain named.
+Found a query that is silently wrong, or an indicator that names something benign? Those are security problems here, not ordinary bugs. [SECURITY.md](SECURITY.md) covers how to report them privately, how indicators are sourced, and how to dispute a listing if you own the app or domain named.
 
-Participation is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). What has landed since the last curation milestone, and what is queued for the next one, is in [CHANGELOG.md](CHANGELOG.md) — anything a defender would notice belongs there under *Unreleased* in the same pull request.
+Participation is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). What has landed since the last curation milestone, and what is queued for the next one, is in [CHANGELOG.md](CHANGELOG.md), and anything a defender would notice belongs there under *Unreleased* in the same pull request.
 
 ---
 
 ## License
 
-[MIT](LICENSE) © Juan Andres Rodriguez — use it, fork it, ship it.
+[MIT](LICENSE) © Juan Andres Rodriguez: use it, fork it, ship it.
 
 **Citing it** → [`CITATION.cff`](CITATION.cff) drives GitHub's *Cite this repository* button, so a write-up, a detection-engineering post or a conference deck that reuses these queries can attribute them in APA or BibTeX instead of pasting them unmarked.
