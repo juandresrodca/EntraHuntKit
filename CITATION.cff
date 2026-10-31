@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use these queries, please cite this repository."
+title: "EntraHuntKit: ATT&CK-mapped KQL threat-hunting queries and IOC lists for Entra ID, Intune and Microsoft 365"
+abstract: >-
+  A curated corpus of paste-ready KQL threat-hunting queries for Microsoft
+  Defender XDR Advanced Hunting and Microsoft Sentinel, each mapped to MITRE
+  ATT&CK, together with sourced indicator lists. Every query names the tables
+  and columns it reads, so a detection engineer can audit it before running it.
+type: software
+authors:
+  - given-names: "Juan Andres"
+    family-names: "Rodriguez"
+    alias: "juandresrodca"
+    website: "https://github.com/juandresrodca"
+repository-code: "https://github.com/juandresrodca/EntraHuntKit"
+url: "https://github.com/juandresrodca/EntraHuntKit"
+license: MIT
+keywords:
+  - threat-hunting
+  - kql
+  - mitre-attack
+  - microsoft-defender-xdr
+  - microsoft-sentinel
+  - entra-id
+  - intune
+  - microsoft-365
+  - detection-engineering
+  - blue-team

@@ -144,3 +144,5 @@ Participation is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). What has
 ## License
 
 [MIT](LICENSE) © Juan Andres Rodriguez — use it, fork it, ship it.
+
+**Citing it** → [`CITATION.cff`](CITATION.cff) drives GitHub's *Cite this repository* button, so a write-up, a detection-engineering post or a conference deck that reuses these queries can attribute them in APA or BibTeX instead of pasting them unmarked.
