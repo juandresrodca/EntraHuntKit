@@ -3,10 +3,10 @@ Thanks for contributing to EntraHuntKit.
 
 Two things worth knowing before you read the checklists:
 
-1. **There is no CI here.** `.github/` holds issue forms and nothing else, so no
-   tick on this pull request means a machine checked anything. Every box below is
-   checked by a person reading the diff — which is why the sections ask you to say
-   where you ran the query rather than to trust a green light.
+1. **There is no CI in this repository.** There are no workflows, so no tick on
+   this pull request means a machine checked anything. Every box below is checked by
+   a person reading the diff, which is why the sections ask you to say where you ran
+   the query rather than to trust a green light.
 2. **Most of this template is deletable.** A typo fix, a broken link or a tuning
    note that got clearer needs **What this changes** and nothing else. Delete the
    rest.
