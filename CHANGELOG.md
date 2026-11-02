@@ -43,3 +43,15 @@ Initial public release. 16 ATT&CK-mapped hunting queries across 7 tactics, plus 
 - **Exfiltration** (1): anomalous mass file download.
 - **IOC lists**: abused/malicious OAuth app IDs, suspicious inbox-rule patterns, high-risk Graph permission scopes.
 - Scaffold: MIT license, scout-aesthetic README with ATT&CK coverage table, contributing guide.
+
+<!-- Comparison links. EntraHuntKit carries no git tags, so GET /repos/juandresrodca/
+     EntraHuntKit/tags returns an empty list and no definition here can point at a
+     releases/tag/ URL. The convention, settled in #9: a version points at the commit
+     that cut it, and [Unreleased] is a compare from the last commit of release day
+     (0ecedbf, 04 August 2026 22:11) rather than from the first commit this Unreleased
+     block records. A compare link is a diff, so a reader following it expects
+     everything since the release, including the three README commits of 10 August that
+     the block above deliberately does not account for. When the first tag is cut, each
+     definition moves to that tag and [Unreleased] compares from it. -->
+[Unreleased]: https://github.com/juandresrodca/EntraHuntKit/compare/0ecedbf...HEAD
+[0.1.0]: https://github.com/juandresrodca/EntraHuntKit/commits/60a3c6c
