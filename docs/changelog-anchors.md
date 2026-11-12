@@ -55,11 +55,12 @@ definitions move to it, not what it is called.
 ## Where it is cited from
 
 [`CHANGELOG.md`](../CHANGELOG.md) in this repository cites this anchor from its
-comparison-link block. The changelogs in
-[DorkCraft](https://github.com/juandresrodca/DorkCraft/blob/main/CHANGELOG.md) and
-[IntuneGraph](https://github.com/juandresrodca/IntuneGraph/blob/main/CHANGELOG.md) each
-state the rule in a comment of their own today, which is the drift this page is written
-to end; they move to a citation on their own commits.
+comparison-link block, and so does the changelog in
+[DorkCraft](https://github.com/juandresrodca/DorkCraft/blob/main/CHANGELOG.md), which
+moved to a citation in `4d14d67` on 11 November 2026. The changelog in
+[IntuneGraph](https://github.com/juandresrodca/IntuneGraph/blob/main/CHANGELOG.md) still
+states the rule in a comment of its own, which is the drift this page is written to end;
+it moves to a citation on its own commits.
 
 The three current anchors, for the record, so that a reader checking this page against a
 changelog does not have to open three files:
