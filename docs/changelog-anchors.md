@@ -62,8 +62,9 @@ moved to a citation in `4d14d67` on 11 November 2026. The changelog in
 states the rule in a comment of its own, which is the drift this page is written to end;
 it moves to a citation on its own commits.
 
-The three current anchors, for the record, so that a reader checking this page against a
-changelog does not have to open three files:
+The six current anchors, two in EntraHuntKit, three in IntuneGraph and one in DorkCraft,
+for the record, so that a reader checking this page against a changelog does not have to
+open three files:
 
 | Repository | Definition | Points at |
 |---|---|---|
